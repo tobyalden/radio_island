@@ -34,6 +34,8 @@ class Player extends Entity
     private var velocity:Vector2;
     private var isDead:Bool;
     private var canMove:Bool;
+    private var wasOnGround:Bool;
+    private var wasOnWall:Bool;
 
     public function new(x:Float, y:Float) {
         super(x, y);
@@ -55,6 +57,8 @@ class Player extends Entity
             canMove = true;
         });
         addTween(allowMove, true);
+        wasOnGround = true;
+        wasOnWall = false;
         if(sfx == null) {
             sfx = [
                 "jump" => new Sfx("audio/jump.wav"),
@@ -62,6 +66,7 @@ class Player extends Entity
                 "run" => new Sfx("audio/run.wav"),
                 "skid" => new Sfx("audio/skid.wav"),
                 "die" => new Sfx("audio/die.wav"),
+                "land" => new Sfx("audio/land.wav"),
                 "save" => new Sfx("audio/save.wav")
             ];
         }
@@ -137,6 +142,11 @@ class Player extends Entity
             if(Input.pressed("jump")) {
                 velocity.y = -JUMP_POWER;
                 sfx["jump"].play();
+                makeDustAtFeet();
+            }
+            if(!wasOnGround) {
+                sfx["land"].play();
+                makeDustAtFeet();
             }
         }
         else if(isOnWall()) {
@@ -149,6 +159,11 @@ class Player extends Entity
                     isOnLeftWall() ? WALL_JUMP_POWER_X : -WALL_JUMP_POWER_X
                 );
                 sfx["jump"].play();
+                makeDustOnWall(isOnLeftWall(), false);
+            }
+            if(!wasOnWall) {
+                sfx["land"].play();
+                makeDustOnWall(isOnLeftWall(), false);
             }
         }
         else {
@@ -159,6 +174,8 @@ class Player extends Entity
             velocity.y = Math.min(velocity.y, MAX_FALL_SPEED);
         }
 
+        wasOnGround = isOnGround();
+        wasOnWall = isOnWall();
         moveBy(velocity.x * HXP.elapsed, velocity.y * HXP.elapsed, "walls");
     }
 
@@ -230,6 +247,14 @@ class Player extends Entity
                 sfx["slide"].loop();
             }
             sfx["slide"].volume = Math.abs(velocity.y) / MAX_FALL_SPEED_ON_WALL;
+            if(velocity.y > 0) {
+                if(isOnLeftWall() && scene.collidePoint("walls", left - 1, top) != null) {
+                    makeDustOnWall(true, true);
+                }
+                else if(isOnRightWall() && scene.collidePoint("walls", x + width + 1, top) != null) {
+                    makeDustOnWall(false, true);
+                }
+            }
         }
         else {
             sfx["slide"].stop();
@@ -292,5 +317,37 @@ class Player extends Entity
 
     private function isOnLeftWall() {
         return collide("walls", x - 1, y) != null;
+    }
+
+    private function makeDustAtFeet() {
+        //var dust = new Dust(centerX - 4 + (sprite.flipX ? 1 : -1), bottom - 4, "ground");
+        var dust = new Dust(centerX - 4, bottom - 4, "ground");
+        //var platform = collide("platform", x, y + 1);
+        //if(platform != null) {
+            //cast(platform, MovingPlatform).attached.push(dust);
+        //}
+        HXP.scene.add(dust);
+    }
+
+    private function makeDustOnWall(isLeftWall:Bool, fromSlide:Bool) {
+        var dust:Dust;
+        if(fromSlide) {
+            if(isLeftWall) {
+                dust = new Dust(left - 6, centerY - 5, "slide");
+            }
+            else {
+                dust = new Dust(right - 6, centerY - 5, "slide");
+            }
+        }
+        else {
+            if(isLeftWall) {
+                dust = new Dust(left, centerY, "wall");
+            }
+            else {
+                dust = new Dust(right - 4, centerY, "wall");
+                dust.sprite.flipX = true;
+            }
+        }
+        scene.add(dust);
     }
 }
