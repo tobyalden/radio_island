@@ -32,6 +32,9 @@ class GameScene extends Scene
     }
 
     override public function update() {
+        if(Key.pressed(Key.R)) {
+            HXP.scene = new GameScene();
+        }
         super.update();
         var cameraOffsetX = (HXP.width - GameScene.GAME_WIDTH) / 2;
         var cameraOffsetY = (HXP.height - GameScene.GAME_HEIGHT) / 2;
