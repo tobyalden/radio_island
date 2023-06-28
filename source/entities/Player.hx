@@ -27,6 +27,7 @@ class Player extends Entity
     public static inline var WALL_STICKINESS = 60;
     public static inline var MAX_FALL_SPEED = 270;
     public static inline var MAX_FALL_SPEED_ON_WALL = 200;
+    public static inline var MAX_RISE_SPEED = 170;
 
     public static var sfx:Map<String, Sfx> = null;
 
@@ -36,6 +37,7 @@ class Player extends Entity
     private var canMove:Bool;
     private var wasOnGround:Bool;
     private var wasOnWall:Bool;
+    private var hasCollidedWithAirCurrent:Bool;
 
     public function new(x:Float, y:Float) {
         super(x, y);
@@ -59,6 +61,7 @@ class Player extends Entity
         addTween(allowMove, true);
         wasOnGround = true;
         wasOnWall = false;
+        hasCollidedWithAirCurrent = false;
         if(sfx == null) {
             sfx = [
                 "jump" => new Sfx("audio/jump.wav"),
@@ -67,6 +70,7 @@ class Player extends Entity
                 "skid" => new Sfx("audio/skid.wav"),
                 "die" => new Sfx("audio/die.wav"),
                 "land" => new Sfx("audio/land.wav"),
+                "whoosh" => new Sfx("audio/whoosh.wav"),
                 "save" => new Sfx("audio/save.wav")
             ];
         }
@@ -148,6 +152,7 @@ class Player extends Entity
                 sfx["land"].play();
                 makeDustAtFeet();
             }
+            hasCollidedWithAirCurrent = false;
         }
         else if(isOnWall()) {
             var gravity = velocity.y > 0 ? GRAVITY_ON_WALL : GRAVITY;
@@ -167,12 +172,19 @@ class Player extends Entity
             }
         }
         else {
-            if(Input.released("jump")) {
+            if(Input.released("jump") && !hasCollidedWithAirCurrent) {
                 velocity.y = Math.max(velocity.y, -JUMP_CANCEL_POWER);
             }
             velocity.y += GRAVITY * HXP.elapsed;
             velocity.y = Math.min(velocity.y, MAX_FALL_SPEED);
         }
+
+        if(collide("aircurrent", x, y) != null) {
+            velocity.y = Math.min(velocity.y, AirCurrent.CURRENT_CANCEL_POWER);
+            velocity.y -= AirCurrent.CURRENT_POWER * HXP.elapsed;
+            hasCollidedWithAirCurrent = true;
+        }
+        velocity.y = Math.max(velocity.y, -MAX_RISE_SPEED);
 
         wasOnGround = isOnGround();
         wasOnWall = isOnWall();
@@ -266,6 +278,15 @@ class Player extends Entity
         }
         else {
             sfx["run"].stop();
+        }
+        if(collide("aircurrent", x, y) != null) {
+            if(!sfx["whoosh"].playing) {
+                sfx["whoosh"].loop();
+            }
+            sfx["whoosh"].volume = Math.min(Math.abs(velocity.y) / MAX_RISE_SPEED, 1);
+        }
+        else {
+            sfx["whoosh"].stop();
         }
     }
 

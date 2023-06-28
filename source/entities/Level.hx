@@ -46,6 +46,9 @@ class Level extends Entity
                     if(entity.name == "player") {
                         entities.push(new Player(entity.x, entity.y - 2));
                     }
+                    if(entity.name == "air_current") {
+                        entities.push(new AirCurrent(entity.x, entity.y, entity.width, entity.height));
+                    }
                 }
             }
         }

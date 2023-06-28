@@ -118,7 +118,8 @@
       "gridCellsX": 72,
       "gridCellsY": 90,
       "entities": [
-        {"name": "player", "id": 4, "_eid": "42404373", "x": 30, "y": 650, "originX": 0, "originY": 0}
+        {"name": "player", "id": 4, "_eid": "42404373", "x": 330, "y": 150, "originX": 0, "originY": 0},
+        {"name": "air_current", "id": 5, "_eid": "97369304", "x": 360, "y": 80, "width": 20, "height": 80, "originX": 0, "originY": 0}
       ]
     },
     {

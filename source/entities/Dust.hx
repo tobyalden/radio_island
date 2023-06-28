@@ -28,6 +28,7 @@ class Dust extends Entity {
     }
 
     public override function update() {
+        super.update();
         if(sprite.complete) {
             scene.remove(this);
         }
