@@ -8,7 +8,8 @@ import haxepunk.masks.*;
 
 class AirCurrent extends Entity {
     public static inline var CURRENT_POWER = 660;
-    public static inline var CURRENT_CANCEL_POWER = 100;
+    public static inline var CURRENT_POWER_WITH_JUMP_HELD = 760;
+    public static inline var CURRENT_CANCEL_POWER = 120;
 
     public var sprite:Spritemap;
 

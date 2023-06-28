@@ -28,6 +28,7 @@ class Player extends Entity
     public static inline var MAX_FALL_SPEED = 270;
     public static inline var MAX_FALL_SPEED_ON_WALL = 200;
     public static inline var MAX_RISE_SPEED = 170;
+    public static inline var MAX_RISE_SPEED_WITH_JUMP_HELD = 220;
 
     public static var sfx:Map<String, Sfx> = null;
 
@@ -181,10 +182,20 @@ class Player extends Entity
 
         if(collide("aircurrent", x, y) != null) {
             velocity.y = Math.min(velocity.y, AirCurrent.CURRENT_CANCEL_POWER);
-            velocity.y -= AirCurrent.CURRENT_POWER * HXP.elapsed;
+            if(Input.check("jump")) {
+                velocity.y -= AirCurrent.CURRENT_POWER_WITH_JUMP_HELD * HXP.elapsed;
+            }
+            else {
+                velocity.y -= AirCurrent.CURRENT_POWER * HXP.elapsed;
+            }
             hasCollidedWithAirCurrent = true;
         }
-        velocity.y = Math.max(velocity.y, -MAX_RISE_SPEED);
+        if(Input.check("jump")) {
+            velocity.y = Math.max(velocity.y, -MAX_RISE_SPEED_WITH_JUMP_HELD);
+        }
+        else {
+            velocity.y = Math.max(velocity.y, -MAX_RISE_SPEED);
+        }
 
         wasOnGround = isOnGround();
         wasOnWall = isOnWall();
