@@ -28,13 +28,16 @@ class GameScene extends Scene
                 player = cast(entity, Player);
             }
         }
+        add(new Letterbox());
     }
 
     override public function update() {
         super.update();
+        var cameraOffsetX = (HXP.width - GameScene.GAME_WIDTH) / 2;
+        var cameraOffsetY = (HXP.height - GameScene.GAME_HEIGHT) / 2;
         camera.setTo(
-            Math.floor(player.centerX / GAME_WIDTH) * GAME_WIDTH,
-            Math.floor(player.centerY / GAME_HEIGHT) * GAME_HEIGHT,
+            Math.floor(player.centerX / GAME_WIDTH) * GAME_WIDTH - cameraOffsetX,
+            Math.floor(player.centerY / GAME_HEIGHT) * GAME_HEIGHT - cameraOffsetY,
             0, 0
         );
     }
