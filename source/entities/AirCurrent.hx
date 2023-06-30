@@ -11,7 +11,7 @@ class AirCurrent extends Entity {
     public static inline var CURRENT_POWER_WITH_JUMP_HELD = 760;
     public static inline var CURRENT_CANCEL_POWER = 120;
 
-    public var sprite:Spritemap;
+    //public var sprite:TiledSpritemap;
 
     public function new(x:Float, y:Float, width:Int, height:Int) {
         super(x, y);
