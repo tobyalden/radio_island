@@ -16,16 +16,20 @@ class GameScene extends Scene
 {
     public static inline var GAME_WIDTH = 240;
     public static inline var GAME_HEIGHT = 180;
+    public static inline var SAVE_FILE_NAME = "radioisland";
 
     private var player:Player;
 
     override public function begin() {
+        Data.load(SAVE_FILE_NAME);
         var level = new Level("level");
         add(level);
         for(entity in level.entities) {
             add(entity);
             if(Type.getClass(entity) == Player) {
                 player = cast(entity, Player);
+                player.x = Data.read("playerX", player.x);
+                player.y = Data.read("playerY", player.y);
             }
         }
         add(new Letterbox());
@@ -33,6 +37,14 @@ class GameScene extends Scene
 
     override public function update() {
         if(Key.pressed(Key.R)) {
+            if(Key.check(Key.SHIFT)) {
+                Data.clear();
+            }
+            else {
+                Data.write("playerX", player.x);
+                Data.write("playerY", player.y);
+                Data.save(SAVE_FILE_NAME);
+            }
             HXP.scene = new GameScene();
         }
         super.update();
