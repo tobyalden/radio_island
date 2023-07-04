@@ -22,6 +22,8 @@ class GameScene extends Scene
 
     override public function begin() {
         Data.load(SAVE_FILE_NAME);
+        var background = new Backdrop("graphics/background.png");
+        addGraphic(background, 100);
         var level = new Level("level");
         add(level);
         for(entity in level.entities) {

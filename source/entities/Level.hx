@@ -58,14 +58,19 @@ class Level extends Entity
     }
 
     public function updateGraphic() {
+        var wallsImage = new Image("graphics/walls.png");
         tiles = new Tilemap(
-            'graphics/tiles.png',
+            'graphics/walls.png',
             walls.width, walls.height, walls.tileWidth, walls.tileHeight
         );
+        var maxTileX = Std.int(wallsImage.width / walls.tileWidth);
+        var maxTileY = Std.int(wallsImage.height / walls.tileHeight);
         for(tileX in 0...walls.columns) {
             for(tileY in 0...walls.rows) {
                 if(walls.getTile(tileX, tileY)) {
-                    tiles.setTile(tileX, tileY, 0);
+                    //var tile = (tileX + tileY * walls.columns) % (maxTileX * maxTileY);
+                    var tile = (tileX + tileY * walls.columns);
+                    tiles.setTile(tileX, tileY, tile);
                 }
             }
         }
