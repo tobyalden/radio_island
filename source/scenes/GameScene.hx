@@ -23,8 +23,33 @@ class GameScene extends Scene
 
     override public function begin() {
         Data.load(SAVE_FILE_NAME);
+
         var background = new Backdrop("graphics/background.png");
         addGraphic(background, 100);
+
+        var foliage = new Backdrop("graphics/foliage.png");
+        addGraphic(foliage, 40);
+        HXP.tween(foliage, {x: 3}, 4, {ease: Ease.sineInOut, type: TweenType.PingPong});
+
+        var foliage2 = new Backdrop("graphics/foliage.png");
+        addGraphic(foliage2, 40);
+        HXP.tween(foliage2, {x: 5}, 6, {ease: Ease.sineInOut, type: TweenType.PingPong});
+
+        var foliage3 = new Backdrop("graphics/foliage2.png");
+        addGraphic(foliage3, 60);
+        HXP.tween(foliage3, {x: 7}, 8, {ease: Ease.sineInOut, type: TweenType.PingPong});
+
+        var shadows = new Backdrop("graphics/shadows.png");
+        addGraphic(shadows, 20);
+        HXP.tween(shadows, {x: -48}, 6.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        HXP.tween(shadows, {y: -24}, 12.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
+
+        var rainbow = new Backdrop("graphics/rainbow.png");
+        addGraphic(rainbow, -100);
+        rainbow.alpha = 0.25;
+        HXP.tween(rainbow, {x: -43}, 11.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        HXP.tween(rainbow, {y: 19}, 8.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
+
         var level = new Level("level");
         add(level);
         for(entity in level.entities) {
@@ -85,6 +110,14 @@ class GameScene extends Scene
             if(Key.check(Key.S)) {
                 player.y += DEBUG_MOVE_SPEED * HXP.elapsed;
             }
+        }
+
+        // Camera
+        if(Key.check(Key.C)) {
+            camera.scale = 0.1;
+        }
+        else {
+            camera.scale = 1;
         }
 
         // Resetting

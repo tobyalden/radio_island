@@ -65,11 +65,12 @@ class Level extends Entity
         );
         var maxTileX = Std.int(wallsImage.width / walls.tileWidth);
         var maxTileY = Std.int(wallsImage.height / walls.tileHeight);
+        trace(maxTileX);
+        trace(maxTileY);
         for(tileX in 0...walls.columns) {
             for(tileY in 0...walls.rows) {
                 if(walls.getTile(tileX, tileY)) {
-                    //var tile = (tileX + tileY * walls.columns) % (maxTileX * maxTileY);
-                    var tile = (tileX + tileY * walls.columns);
+                    var tile = ((tileX % maxTileX) + (tileY % maxTileY) * maxTileX);
                     tiles.setTile(tileX, tileY, tile);
                 }
             }
