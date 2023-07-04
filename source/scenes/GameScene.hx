@@ -20,6 +20,7 @@ class GameScene extends Scene
     public static inline var DEBUG_MOVE_SPEED = 400;
 
     private var player:Player;
+    private var level:Level;
 
     override public function begin() {
         Data.load(SAVE_FILE_NAME);
@@ -56,7 +57,7 @@ class GameScene extends Scene
         HXP.tween(glow, {x: -38}, 7.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
         HXP.tween(glow, {y: -44}, 9.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
-        var level = new Level("level");
+        level = new Level("level");
         add(level);
         for(entity in level.entities) {
             add(entity);
@@ -72,6 +73,12 @@ class GameScene extends Scene
     override public function update() {
         debug();
         super.update();
+        if(player.centerX < 0) {
+            player.x += level.width;
+        }
+        if(player.centerX > level.width) {
+            player.x -= level.width;
+        }
         var cameraOffsetX = (HXP.width - GameScene.GAME_WIDTH) / 2;
         var cameraOffsetY = (HXP.height - GameScene.GAME_HEIGHT) / 2;
         camera.setTo(
