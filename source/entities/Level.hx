@@ -11,10 +11,10 @@ class Level extends Entity
 {
     public var entities(default, null):Array<Entity>;
     private var walls:Grid;
-    private var tiles:Tilemap;
 
     public function new(levelName:String) {
         super(0, 0);
+        layer = -10;
         type = "walls";
         loadLevel(levelName);
         updateGraphic();
@@ -58,24 +58,47 @@ class Level extends Entity
     }
 
     public function updateGraphic() {
-        var wallsImage = new Image("graphics/walls.png");
-        tiles = new Tilemap(
+        var bricksImage = new Image("graphics/walls.png");
+        var bricks = new Tilemap(
             'graphics/walls.png',
             walls.width, walls.height, walls.tileWidth, walls.tileHeight
         );
-        var maxTileX = Std.int(wallsImage.width / walls.tileWidth);
-        var maxTileY = Std.int(wallsImage.height / walls.tileHeight);
-        trace(maxTileX);
-        trace(maxTileY);
+        var lace = new Tilemap(
+            'graphics/lace.png',
+            walls.width, walls.height, walls.tileWidth, walls.tileHeight
+        );
+        var tileOutline = new Tilemap(
+            'graphics/tileoutline.png',
+            walls.width, walls.height, walls.tileWidth, walls.tileHeight
+        );
+        var maxBrickTileX = Std.int(bricksImage.width / walls.tileWidth);
+        var maxBrickTileY = Std.int(bricksImage.height / walls.tileHeight);
+        var grassImage = new Image("graphics/grass.png");
+        var grass = new Tilemap(
+            'graphics/grass.png',
+            walls.width, walls.height, walls.tileWidth, walls.tileHeight
+        );
+        var maxGrassTileX = Std.int(grassImage.width / walls.tileWidth);
         for(tileX in 0...walls.columns) {
             for(tileY in 0...walls.rows) {
                 if(walls.getTile(tileX, tileY)) {
-                    var tile = ((tileX % maxTileX) + (tileY % maxTileY) * maxTileX);
-                    tiles.setTile(tileX, tileY, tile);
+                    var tile = ((tileX % maxBrickTileX) + (tileY % maxBrickTileY) * maxBrickTileX);
+                    bricks.setTile(tileX, tileY, tile);
+                    lace.setTile(tileX, tileY, tile);
+                    if(Random.random < 0.5) {
+                        tileOutline.setTile(tileX, tileY, HXP.choose(0, 1, 2, 3));
+                    }
+                }
+                else if(walls.getTile(tileX, tileY + 1)) {
+                    var tile = tileX % maxGrassTileX;
+                    if(Random.random < 0.75) {
+                        tile += maxGrassTileX;
+                    }
+                    grass.setTile(tileX, tileY, tile);
                 }
             }
         }
-        graphic = tiles;
+        graphic = new Graphiclist([bricks, tileOutline, lace, grass]);
     }
 }
 

@@ -46,9 +46,15 @@ class GameScene extends Scene
 
         var rainbow = new Backdrop("graphics/rainbow.png");
         addGraphic(rainbow, -100);
-        rainbow.alpha = 0.25;
+        rainbow.alpha = 0.1;
         HXP.tween(rainbow, {x: -43}, 11.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
         HXP.tween(rainbow, {y: 19}, 8.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
+
+        var glow = new Backdrop("graphics/foregroundshadows.png");
+        glow.alpha = 0.2;
+        addGraphic(glow, -20);
+        HXP.tween(glow, {x: -38}, 7.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        HXP.tween(glow, {y: -44}, 9.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
         var level = new Level("level");
         add(level);
