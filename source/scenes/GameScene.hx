@@ -17,6 +17,7 @@ class GameScene extends Scene
     public static inline var GAME_WIDTH = 240;
     public static inline var GAME_HEIGHT = 180;
     public static inline var SAVE_FILE_NAME = "radioisland";
+    public static inline var DEBUG_MOVE_SPEED = 400;
 
     private var player:Player;
 
@@ -38,6 +39,55 @@ class GameScene extends Scene
     }
 
     override public function update() {
+        debug();
+        super.update();
+        var cameraOffsetX = (HXP.width - GameScene.GAME_WIDTH) / 2;
+        var cameraOffsetY = (HXP.height - GameScene.GAME_HEIGHT) / 2;
+        camera.setTo(
+            Math.floor(player.centerX / GAME_WIDTH) * GAME_WIDTH - cameraOffsetX,
+            Math.floor(player.centerY / GAME_HEIGHT) * GAME_HEIGHT - cameraOffsetY,
+            0, 0
+        );
+    }
+
+
+    private function debug() {
+        player.active = !(Key.check(Key.DIGIT_0) || Key.check(Key.DIGIT_9));
+
+        // Debug movement (screen by screen)
+        if(Key.check(Key.DIGIT_0)) {
+            if(Key.pressed(Key.A)) {
+                player.x -= GameScene.GAME_WIDTH;
+            }
+            if(Key.pressed(Key.D)) {
+                player.x += GameScene.GAME_WIDTH;
+            }
+            if(Key.pressed(Key.W)) {
+                player.y -= GameScene.GAME_HEIGHT;
+            }
+            if(Key.pressed(Key.S)) {
+                player.y += GameScene.GAME_HEIGHT;
+            }
+
+        }
+
+        // Debug movement (smooth)
+        if(Key.check(Key.DIGIT_9)) {
+            if(Key.check(Key.A)) {
+                player.x -= DEBUG_MOVE_SPEED * HXP.elapsed;
+            }
+            if(Key.check(Key.D)) {
+                player.x += DEBUG_MOVE_SPEED * HXP.elapsed;
+            }
+            if(Key.check(Key.W)) {
+                player.y -= DEBUG_MOVE_SPEED * HXP.elapsed;
+            }
+            if(Key.check(Key.S)) {
+                player.y += DEBUG_MOVE_SPEED * HXP.elapsed;
+            }
+        }
+
+        // Resetting
         if(Key.pressed(Key.R)) {
             if(Key.check(Key.SHIFT)) {
                 Data.clear();
@@ -49,13 +99,5 @@ class GameScene extends Scene
             }
             HXP.scene = new GameScene();
         }
-        super.update();
-        var cameraOffsetX = (HXP.width - GameScene.GAME_WIDTH) / 2;
-        var cameraOffsetY = (HXP.height - GameScene.GAME_HEIGHT) / 2;
-        camera.setTo(
-            Math.floor(player.centerX / GAME_WIDTH) * GAME_WIDTH - cameraOffsetX,
-            Math.floor(player.centerY / GAME_HEIGHT) * GAME_HEIGHT - cameraOffsetY,
-            0, 0
-        );
     }
 }
