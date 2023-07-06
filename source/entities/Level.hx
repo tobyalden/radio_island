@@ -54,6 +54,13 @@ class Level extends Entity
                     }
                 }
             }
+            else if(layer.name == "vibes") {
+                // Load vibes
+                for(vibeIndex in 0...layer.entities.length) {
+                    var vibe = layer.entities[vibeIndex];
+                    entities.push(new Vibe(vibe.x, vibe.y, vibe.width, vibe.height, vibe.values.background));
+                }
+            }
         }
     }
 
