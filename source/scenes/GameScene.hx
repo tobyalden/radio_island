@@ -91,13 +91,12 @@ class GameScene extends Scene
             player.x -= level.width;
         }
 
-        // Check vibes
+        // Check vibes & update backgrounds
         var currentBackgroundName = "default";
         var vibe = player.collide("vibe", player.x, player.y);
         if(vibe != null) {
             currentBackgroundName = cast(vibe, Vibe).backgroundName;
         }
-        trace(currentBackgroundName);
         for(backgroundName in backgrounds.keys()) {
             if(backgroundName == currentBackgroundName) {
                 backgrounds[backgroundName].alpha = Math.min(
