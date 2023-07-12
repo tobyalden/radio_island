@@ -50,7 +50,7 @@ class Level extends Entity
                         entities.push(new AirCurrent(entity.x, entity.y, entity.width, entity.height));
                     }
                     if(entity.name == "hidden_passage") {
-                        entities.push(new HiddenPassage(entity.x, entity.y, entity.width, entity.height));
+                        entities.push(new HiddenPassage(entity.x, entity.y, entity.width, entity.height, walls));
                     }
                 }
             }

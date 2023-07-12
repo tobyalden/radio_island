@@ -37,34 +37,34 @@ class GameScene extends Scene
             backgrounds[backgroundName].alpha = 0;
         }
 
-        var foliage = new Backdrop("graphics/foliage.png");
-        addGraphic(foliage, 40);
-        HXP.tween(foliage, {x: 3}, 4, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //var foliage = new Backdrop("graphics/foliage.png");
+        //addGraphic(foliage, 40);
+        //HXP.tween(foliage, {x: 3}, 4, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
-        var foliageDupe = new Backdrop("graphics/foliage.png");
-        addGraphic(foliageDupe, 40);
-        HXP.tween(foliageDupe, {x: 5}, 6, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //var foliageDupe = new Backdrop("graphics/foliage.png");
+        //addGraphic(foliageDupe, 40);
+        //HXP.tween(foliageDupe, {x: 5}, 6, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
-        var foliage2 = new Backdrop("graphics/foliage2.png");
-        addGraphic(foliage2, 60);
-        HXP.tween(foliage2, {x: 7}, 8, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //var foliage2 = new Backdrop("graphics/foliage2.png");
+        //addGraphic(foliage2, 60);
+        //HXP.tween(foliage2, {x: 7}, 8, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
-        var shadows = new Backdrop("graphics/shadows.png");
-        addGraphic(shadows, 20);
-        HXP.tween(shadows, {x: -48}, 6.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
-        HXP.tween(shadows, {y: -24}, 12.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //var shadows = new Backdrop("graphics/shadows.png");
+        //addGraphic(shadows, 20);
+        //HXP.tween(shadows, {x: -48}, 6.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //HXP.tween(shadows, {y: -24}, 12.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
-        var rainbow = new Backdrop("graphics/rainbow.png");
-        addGraphic(rainbow, -100);
-        rainbow.alpha = 0.1;
-        HXP.tween(rainbow, {x: -43}, 11.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
-        HXP.tween(rainbow, {y: 19}, 8.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //var rainbow = new Backdrop("graphics/rainbow.png");
+        //addGraphic(rainbow, -100);
+        //rainbow.alpha = 0.1;
+        //HXP.tween(rainbow, {x: -43}, 11.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //HXP.tween(rainbow, {y: 19}, 8.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
-        var glow = new Backdrop("graphics/glow.png");
-        glow.alpha = 0.2;
-        addGraphic(glow, -20);
-        HXP.tween(glow, {x: -38}, 7.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
-        HXP.tween(glow, {y: -44}, 9.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //var glow = new Backdrop("graphics/glow.png");
+        //glow.alpha = 0.2;
+        //addGraphic(glow, -20);
+        //HXP.tween(glow, {x: -38}, 7.9, {ease: Ease.sineInOut, type: TweenType.PingPong});
+        //HXP.tween(glow, {y: -44}, 9.3, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
         level = new Level("level");
         add(level);
