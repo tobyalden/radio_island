@@ -18,15 +18,20 @@ class GameScene extends Scene
     public static inline var GAME_HEIGHT = 180;
     public static inline var SAVE_FILE_NAME = "radioisland";
     public static inline var DEBUG_MOVE_SPEED = 400;
-    public static inline var BACKGROUND_FADE_SPEED = 2;
+    public static inline var BACKGROUND_FADE_SPEED = 3;
 
     private var player:Player;
     private var level:Level;
     private var backgrounds:Map<String, Backdrop>;
     private var backgroundTweener:VarTween;
+    private var deepBackground:Backdrop;
 
     override public function begin() {
         Data.load(SAVE_FILE_NAME);
+
+        deepBackground = new Backdrop("graphics/deepbackground.png");
+        addGraphic(deepBackground, 200);
+        //HXP.tween(deepBackground, {x: 3}, 4, {ease: Ease.sineInOut, type: TweenType.PingPong});
 
         backgrounds = [
             "default" => new Backdrop("graphics/background.png"),
@@ -113,6 +118,9 @@ class GameScene extends Scene
                 );
             }
         }
+
+        deepBackground.x = -(player.centerX % GameScene.GAME_WIDTH / 40);
+        deepBackground.y = -(player.centerY % GameScene.GAME_HEIGHT / 40);
 
         var cameraOffsetX = (HXP.width - GameScene.GAME_WIDTH) / 2;
         var cameraOffsetY = (HXP.height - GameScene.GAME_HEIGHT) / 2;
