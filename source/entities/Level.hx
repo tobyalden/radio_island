@@ -55,6 +55,9 @@ class Level extends Entity
                     if(entity.name == "decoration") {
                         entities.push(new Decoration(entity.x, entity.y, entity.values.fileName, entity.values.layer));
                     }
+                    if(entity.name == "antenna") {
+                        entities.push(new Antenna(entity.x, entity.y));
+                    }
                 }
             }
             else if(layer.name == "vibes") {

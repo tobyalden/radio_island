@@ -4,6 +4,8 @@ import haxepunk.*;
 import haxepunk.utils.*;
 import haxepunk.graphics.*;
 import haxepunk.graphics.tile.*;
+import haxepunk.Tween;
+import haxepunk.tweens.misc.*;
 import haxepunk.masks.*;
 
 class Decoration extends Entity {
