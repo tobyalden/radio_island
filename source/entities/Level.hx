@@ -52,6 +52,9 @@ class Level extends Entity
                     if(entity.name == "hidden_passage") {
                         entities.push(new HiddenPassage(entity.x, entity.y, entity.width, entity.height, walls));
                     }
+                    if(entity.name == "decoration") {
+                        entities.push(new Decoration(entity.x, entity.y, entity.values.fileName, entity.values.layer));
+                    }
                 }
             }
             else if(layer.name == "vibes") {

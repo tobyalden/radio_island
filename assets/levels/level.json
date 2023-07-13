@@ -466,7 +466,31 @@
         {"name": "antenna", "id": 121, "_eid": "18326727", "x": 2060, "y": 1190, "originX": 0, "originY": 0},
         {"name": "air_current", "id": 125, "_eid": "97369304", "x": 2510, "y": 2610, "width": 20, "height": 980, "originX": 0, "originY": 0},
         {"name": "player", "id": 126, "_eid": "42404373", "x": 2470, "y": 2660, "originX": 0, "originY": 0},
-        {"name": "hidden_passage", "id": 127, "_eid": "15243136", "x": 960, "y": 1820, "width": 50, "height": 50, "originX": 0, "originY": 0}
+        {"name": "hidden_passage", "id": 127, "_eid": "15243136", "x": 960, "y": 1820, "width": 50, "height": 50, "originX": 0, "originY": 0},
+        {
+          "name": "decoration",
+          "id": 128,
+          "_eid": "27540696",
+          "x": 2400,
+          "y": 1440,
+          "width": 10,
+          "height": 10,
+          "originX": 0,
+          "originY": 0,
+          "values": {"fileName": "cavedoor", "layer": 50}
+        },
+        {
+          "name": "decoration",
+          "id": 129,
+          "_eid": "27540696",
+          "x": 1680,
+          "y": 1260,
+          "width": 10,
+          "height": 10,
+          "originX": 0,
+          "originY": 0,
+          "values": {"fileName": "lavender", "layer": 50}
+        }
       ]
     },
     {

@@ -85,7 +85,6 @@ class GameScene extends Scene
     }
 
     override public function update() {
-        debug();
         super.update();
 
         // Level wrap-around
@@ -129,6 +128,8 @@ class GameScene extends Scene
             Math.floor(player.centerY / GAME_HEIGHT) * GAME_HEIGHT - cameraOffsetY,
             0, 0
         );
+        camera.scale = 1;
+        debug();
     }
 
 
@@ -170,10 +171,8 @@ class GameScene extends Scene
 
         // Camera
         if(Key.check(Key.C)) {
-            camera.scale = 0.1;
-        }
-        else {
-            camera.scale = 1;
+            camera.scale = 0.04;
+            camera.setTo(0, 0);
         }
 
         // Resetting

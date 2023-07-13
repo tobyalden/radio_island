@@ -1,6 +1,6 @@
 {
   "name": "radio island",
-  "ogmoVersion": "3.3.0",
+  "ogmoVersion": "3.4.0",
   "levelPaths": ["."],
   "backgroundColor": "#989898ff",
   "gridColor": "#3c4049cc",
@@ -268,7 +268,46 @@
       "nodeGhost": true,
       "tags": [],
       "values": [
-        {"name": "background", "definition": "String", "defaults": "", "maxLength": 0, "trimWhitespace": true}
+        {"name": "background", "definition": "String", "display": 0, "defaults": "", "maxLength": 0, "trimWhitespace": true}
+      ]
+    },
+    {
+      "exportID": "27540696",
+      "name": "decoration",
+      "limit": -1,
+      "size": {"x": 10, "y": 10},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#00ff76ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 16, "y": 16},
+      "resizeableX": true,
+      "resizeableY": true,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": false,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": [
+        {"name": "fileName", "definition": "String", "display": 1, "defaults": "placeholder", "maxLength": 0, "trimWhitespace": true},
+        {"name": "layer", "definition": "Integer", "display": 0, "defaults": 50, "bounded": false, "min": -1000, "max": 1000}
       ]
     }
   ],
