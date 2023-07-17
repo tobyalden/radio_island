@@ -10,6 +10,7 @@ import haxepunk.masks.*;
 
 class Antenna extends Entity {
     public var isActivated(default, null):Bool;
+    public var allSprites(default, null):Graphiclist;
     private var pulse:MultiVarTween;
     private var lights:Image;
 
@@ -22,7 +23,11 @@ class Antenna extends Entity {
         pulse = HXP.tween(lights, {alpha: 0}, 2, {ease: Ease.sineInOut, type: TweenType.PingPong, tweener: this});
         lights.color = 0xFF0000;
         layer = 20;
-        var allSprites = new Graphiclist([sprite, lights]);
+        var backlight = new Image('graphics/radiotowerbacklight.png');
+        backlight.color = 0xffbf00;
+        backlight.alpha = 0.7;
+        HXP.tween(backlight, {alpha: 0.5}, 4, {ease: Ease.sineInOut, type: TweenType.PingPong, tweener: this});
+        allSprites = new Graphiclist([backlight, sprite, lights]);
         allSprites.originX = sprite.width / 2 - 20;
         allSprites.originY = sprite.height - 40;
         graphic = allSprites;

@@ -1,5 +1,5 @@
 {
-  "ogmoVersion": "3.4.0",
+  "ogmoVersion": "3.3.0",
   "width": 4800,
   "height": 3600,
   "offsetX": 0,
@@ -465,7 +465,6 @@
         {"name": "hidden_passage", "id": 119, "_eid": "15243136", "x": 3080, "y": 1090, "width": 50, "height": 80, "originX": 0, "originY": 0},
         {"name": "antenna", "id": 121, "_eid": "18326727", "x": 2030, "y": 1210, "originX": 0, "originY": 0},
         {"name": "air_current", "id": 125, "_eid": "97369304", "x": 2510, "y": 2610, "width": 20, "height": 980, "originX": 0, "originY": 0},
-        {"name": "player", "id": 126, "_eid": "42404373", "x": 2470, "y": 2660, "originX": 0, "originY": 0},
         {"name": "hidden_passage", "id": 127, "_eid": "15243136", "x": 960, "y": 1820, "width": 50, "height": 50, "originX": 0, "originY": 0},
         {
           "name": "decoration",
@@ -490,6 +489,19 @@
           "originX": 0,
           "originY": 0,
           "values": {"fileName": "lavender", "layer": 50}
+        },
+        {"name": "player", "id": 130, "_eid": "42404373", "x": 2520, "y": 1590, "originX": 0, "originY": 0},
+        {
+          "name": "decoration",
+          "id": 131,
+          "_eid": "27540696",
+          "x": 1920,
+          "y": 1080,
+          "width": 10,
+          "height": 10,
+          "originX": 0,
+          "originY": 0,
+          "values": {"fileName": "stones", "layer": 50}
         }
       ]
     },
